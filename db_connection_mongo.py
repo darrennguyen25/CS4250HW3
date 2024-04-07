@@ -11,11 +11,20 @@
 
 #importing some Python libraries
 # --> add your Python code here
+from pymongo import MongoClient
+import datetime
 
 def connectDataBase():
 
     # Create a database connection object using pymongo
     # --> add your Python code here
+    DB_NAME = "corpus"
+    DB_HOST = "localhost"
+    DB_PORT = 27017
+
+    client = MongoClient(DB_HOST, DB_PORT)
+    db = client[DB_NAME]
+    return db
 
 def createDocument(col, docId, docText, docTitle, docDate, docCat):
 
@@ -31,19 +40,23 @@ def createDocument(col, docId, docText, docTitle, docDate, docCat):
 
     # insert the document
     # --> add your Python code here
+    col.insert_one(document)
 
 def deleteDocument(col, docId):
 
     # Delete the document from the database
     # --> add your Python code here
+    col.delete_one({"_id": int(docId)})
 
 def updateDocument(col, docId, docText, docTitle, docDate, docCat):
 
     # Delete the document
     # --> add your Python code here
+    deleteDocument(col, docId)
 
     # Create the document with the same id
     # --> add your Python code here
+    createDocument(col, docId, docText, docTitle, docDate, docCat)
 
 def getIndex(col):
 
