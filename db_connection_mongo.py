@@ -46,7 +46,6 @@ def createDocument(col, docId, docText, docTitle, docDate, docCat):
 
     # produce a final document as a dictionary including all the required document fields
     # --> add your Python code here
-
     document = {
         "_id": int(docId),
         "title": docTitle,
