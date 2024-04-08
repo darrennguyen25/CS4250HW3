@@ -12,7 +12,6 @@
 #importing some Python libraries
 # --> add your Python code here
 from pymongo import MongoClient
-import datetime
 
 def connectDataBase():
 
@@ -31,12 +30,35 @@ def createDocument(col, docId, docText, docTitle, docDate, docCat):
     # create a dictionary indexed by term to count how many times each term appears in the document.
     # Use space " " as the delimiter character for terms and remember to lowercase them.
     # --> add your Python code here
+    index = {}
+    docTextList = docText.lower().replace(".", "").replace("?", "").replace("!", "").replace(",", "").split()
+    for text in docTextList:
+        if text in index:
+            index[text] = index.get(text) + 1
+        else:
+            index[text] = 1
 
     # create a list of objects to include full term objects. [{"term", count, num_char}]
     # --> add your Python code here
+    term = []
+    for key, value in index.items():
+        term.append({"term": key, "count": value, "num_chars": len(key)})
 
     # produce a final document as a dictionary including all the required document fields
     # --> add your Python code here
+
+    document = {
+        "_id": int(docId),
+        "title": docTitle,
+        "text": docText,
+        "num_chars": len(docText),
+        "date": docDate,
+        "categories":{
+            "category": docCat
+        },
+        "index": index,
+        "terms": term
+    }
 
     # insert the document
     # --> add your Python code here
@@ -64,3 +86,15 @@ def getIndex(col):
     # {'baseball':'Exercise:1','summer':'Exercise:1,California:1,Arizona:1','months':'Exercise:1,Discovery:3'}
     # ...
     # --> add your Python code here
+    pipeline = [
+        {"$project": {'title': 1, 'index': 1}}
+    ]
+
+    index = col.aggregate(pipeline)
+    indexDict = {}
+    for terms in index:
+        key = list(terms['index'].keys())
+        value = list(terms['index'].values())
+        for k, v in zip(key, value):
+            indexDict[k] = indexDict.get(k, "") + terms['title'] + ":" + str(v) + ","
+    return indexDict
