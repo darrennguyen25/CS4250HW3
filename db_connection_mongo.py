@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------
 # AUTHOR: Darren Nguyen
 # FILENAME: title of the source file
-# SPECIFICATION: description of the program
+# SPECIFICATION: implement a mongoDB connection and CRUD operations
 # FOR: CS 4250- Assignment #3
 # TIME SPENT: 3 hours
 #-----------------------------------------------------------*/
