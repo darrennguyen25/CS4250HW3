@@ -1,9 +1,9 @@
 #-------------------------------------------------------------------------
-# AUTHOR: your name
-# FILENAME: title of the source file
-# SPECIFICATION: description of the program
+# AUTHOR: Darren Nguyen
+# FILENAME: index_mongo.py
+# SPECIFICATION: Front-end user interface in Python to interact with MongoDB database
 # FOR: CS 4250- Assignment #3
-# TIME SPENT: how long it took you to complete the assignment
+# TIME SPENT: Provided by assignment
 #-----------------------------------------------------------*/
 
 from pymongo import MongoClient  # import mongo client to connect
