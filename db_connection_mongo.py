@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------
 # AUTHOR: Darren Nguyen
-# FILENAME: title of the source file
-# SPECIFICATION: implement a MongoDB connection and CRUD operations
+# FILENAME: db_connection_mongo.py
+# SPECIFICATION: Establish a connection to a MongoDB database and perform CRUD operations
 # FOR: CS 4250- Assignment #3
 # TIME SPENT: 3 hours
 #-----------------------------------------------------------*/
@@ -52,9 +52,7 @@ def createDocument(col, docId, docText, docTitle, docDate, docCat):
         "text": docText,
         "num_chars": len(docText),
         "date": docDate,
-        "categories":{
-            "category": docCat
-        },
+        "category": docCat,
         "index": index,
         "terms": term
     }
